@@ -86,8 +86,10 @@ https://github.com/aminnairi/httpserver
 
 EOS;
 
+    echo "HOST: " . $host . PHP_EOL;
+
     echo $output;
 
-    $instruction = "php -S localhost:" . $port . " -t " . $base;
+    $instruction = "php -S " . $host . ":" . $port . " -t " . $base;
 
     exec( $instruction );
