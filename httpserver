@@ -1,0 +1,90 @@
+<?php
+
+    function valid_argument(string $argument, array $valid_arguments) {
+        return in_array($argument, $valid_arguments);
+    }
+
+    function display_manual() {
+        echo <<<EOS
+HTTPSERVER                  PHP's user manual                   HTTPSERVER
+
+
+NOM
+       httpserver - start a built-in PHP web server.
+
+SYNOPSIS
+       php httpserver -a value[, -a value, ...]
+       php httpserver --argument value[, --argument value, ...]
+
+DESCRIPTION
+       This manual page document the PHP version of httpserver.
+
+       Most of the languages have similar functionnalities or add-on.
+       This script is only a clearer interface to the PHP's built-in
+       web server.
+
+       httpserver starts a built-in PHP web server at a given port,
+       base and can be restricted to the loopback local network or
+       opened to the public clients. Most of the arguments have default
+       values and the server can be started without arguments.
+
+    OPTIONS
+        -b, --base  Root folder. Usually the entry point where the
+                    main index.php file is located. Default is ./
+                    which is the absolute path to the current
+                    folder.
+
+        -p, --port  Port that will be used to deploy the built-in web
+                    server. Default is 8888.
+
+        -o, --open  Whever the web server should be opened to others
+                    external clients or restricted to the localhost.
+                    Default is closed (localhost). When opened, the
+                    host is set to 0.0.0.0.
+
+        -h, --help  Display this manual.
+
+EOS;
+
+        die();
+    }
+
+    $output         = "";
+    $instruction    = "";
+    $base           = "./";
+    $port           = 8888;
+    $host           = "localhost";
+    $help           = FALSE;
+    $base_arguments = ["--base", "-b"];
+    $port_arguments = ["--port", "-p"];
+    $open_arguments = ["--open", "-o"];
+    $help_arguments = ["--help", "-h"];
+
+    foreach ($argv as $index => $argument) {
+        $next_argument = $argv[$index + 1] ?? NULL;
+
+        if (valid_argument($argument, $base_arguments) && $next_argument   )  $base = $next_argument;
+        if (valid_argument($argument, $port_arguments) && $next_argument   )  $port = $next_argument;
+        if (valid_argument($argument, $open_arguments)                     )  $host = "0.0.0.0";
+        if (valid_argument($argument, $help_arguments)                     )  $help = TRUE;
+    }
+
+    if ($help) display_manual();
+
+    $output = <<<EOS
+
+https://github.com/aminnairi/httpserver
+    State           => running
+    Root folder     => {$base}
+    Server port     => {$port}
+    Local adress    => http://localhost:{$port}/
+    Exit command    => CTRL C
+
+
+EOS;
+
+    echo $output;
+
+    $instruction = "php -S localhost:" . $port . " -t " . $base;
+
+    exec( $instruction );
