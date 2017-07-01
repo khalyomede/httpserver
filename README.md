@@ -10,3 +10,5 @@
 $ git clone https://github.com/aminnairi/httpserver
 ```
 ![git_clone](https://j.gifs.com/P1Brw4.gif)
+### Without Git
+![without_git_clone](https://j.gifs.com/lOqDlM.gif)
