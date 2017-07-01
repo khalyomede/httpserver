@@ -9,7 +9,7 @@
 HTTPSERVER                  PHP's user manual                   HTTPSERVER
 
 
-NOM
+NAME
        httpserver - start a built-in PHP web server.
 
 SYNOPSIS
