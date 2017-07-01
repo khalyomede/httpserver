@@ -20,6 +20,7 @@ All commands explained later are cumulable (except for the help command).
 ```shell
 $ php httpserver
 ```
+![php_httpserver](https://j.gifs.com/RgEwGO.gif)
 ### Custom document root
 ```shell
 $ php httpserver --base ./docs/
