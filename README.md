@@ -27,6 +27,7 @@ $ php httpserver --base ./docs/
 $ # or
 $ php httpserver -b ./docs/
 ```
+![http_server_base](https://j.gifs.com/mwrG49.gif)
 Where `./docs/` is the path to the document root of your choice. Default is `./`.
 ### Custom port
 ```shell
@@ -34,6 +35,7 @@ $ php httpserver --port 8080
 $ # or
 $ php httpserver -p 8080
 ```
+![php_httpserver_port](https://j.gifs.com/P1Bry1.gif)
 Where `8080` is the desired port from which the server can be reached. Default is `8888`.
 ### Opened to the outside world
 ```shell
