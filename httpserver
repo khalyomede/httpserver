@@ -54,6 +54,8 @@ EOS;
     $base           = "./";
     $port           = 8888;
     $host           = "localhost";
+    $opened         = "UNAVAILABLE";
+    $external_ip    = (string) gethostbyname(gethostname());
     $help           = FALSE;
     $base_arguments = ["--base", "-b"];
     $port_arguments = ["--port", "-p"];
@@ -63,10 +65,10 @@ EOS;
     foreach ($argv as $index => $argument) {
         $next_argument = $argv[$index + 1] ?? NULL;
 
-        if (valid_argument($argument, $base_arguments) && $next_argument   )  $base = $next_argument;
-        if (valid_argument($argument, $port_arguments) && $next_argument   )  $port = $next_argument;
-        if (valid_argument($argument, $open_arguments)                     )  $host = "0.0.0.0";
-        if (valid_argument($argument, $help_arguments)                     )  $help = TRUE;
+        if (valid_argument($argument, $base_arguments) && $next_argument   )  { $base = $next_argument;                     }
+        if (valid_argument($argument, $port_arguments) && $next_argument   )  { $port = $next_argument;                     }
+        if (valid_argument($argument, $open_arguments)                     )  { $host = "0.0.0.0"; $opened = "AVAILABLE";   }
+        if (valid_argument($argument, $help_arguments)                     )  { $help = TRUE;                               }
     }
 
     if ($help) display_manual();
@@ -78,6 +80,7 @@ https://github.com/aminnairi/httpserver
     Root folder     => {$base}
     Server port     => {$port}
     Local adress    => http://localhost:{$port}/
+    External IP     => http://{$external_ip}:{$port}/ ($opened)
     Exit command    => CTRL C
 
 
