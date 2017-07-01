@@ -43,6 +43,7 @@ $ php httpserver --open
 $ # or
 $ php httpserver -o
 ```
+![php_httpserver_open](https://j.gifs.com/GZpg08.gif)
 Tells the script to open the web server to be available outside the loopback network. It basically sets the host parameters to `0.0.0.0`. Default is `localhost`.
 ### Get the help manual
 ```shell
