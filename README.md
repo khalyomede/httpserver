@@ -51,6 +51,7 @@ $ php httpserver --help
 $ # or
 $ php httpserver -h
 ```
+![php_httpserver_help](https://j.gifs.com/2RLOMN.gif)
 Display the manual as in a man page with all the above commands described. Using this options will prevent the built-in web server to start.
 ## Grab the latest version after cloning with Git
 ```shell
