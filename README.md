@@ -44,7 +44,7 @@ $ # or
 $ php httpserver -o
 ```
 ![php_httpserver_open](https://j.gifs.com/GZpg08.gif)
-Tells the script to open the web server to be available outside the loopback network. It basically sets the host parameters to `0.0.0.0`. Default is `localhost`.
+Tells the script to open the web server to be available outside the loopback network. It basically sets the host parameter to `0.0.0.0`. Default is `localhost`.
 ### Get the help manual
 ```shell
 $ php httpserver --help
@@ -52,7 +52,7 @@ $ # or
 $ php httpserver -h
 ```
 ![php_httpserver_help](https://j.gifs.com/2RLOMN.gif)
-Display the manual as in a man page with all the above commands described. Using this options will prevent the built-in web server to start.
+Display the manual as in a man page with all the above commands described. Using this option will prevent the built-in web server to start.
 ## Grab the latest version after cloning with Git
 ```shell
 $ git pull
