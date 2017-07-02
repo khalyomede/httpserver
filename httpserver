@@ -2,8 +2,6 @@
 
     // TODO: ajouter l'adresse alternative (127.0.0.1) dans la sortie standard
     // TODO: réfléchir à une manière de forker le processus (compliqué?)
-    // TODO: ajouter dans le manuel la notice sur le fait que l'option help emp�che le serveur de d�marrer
-
 
     function valid_argument(string $argument, array $valid_arguments) {
         return in_array($argument, $valid_arguments);
@@ -83,12 +81,13 @@ EOS;
     $output = <<<EOS
 
 https://github.com/aminnairi/httpserver
-    State           => running
-    Root folder     => {$base}
-    Server port     => {$port}
-    Local adress    => http://localhost:{$port}/
-    External IP     => http://{$external_ip}:{$port}/ ($opened)
-    Exit command    => CTRL C
+    State               => running
+    Root folder         => {$base}
+    Server port         => {$port}
+    Local address       => http://localhost:{$port}/
+    Alternative address => http://127.0.0.1:{$port}/
+    External IP         => http://{$external_ip}:{$port}/ ($opened)
+    Exit command        => CTRL C
 
 
 EOS;
