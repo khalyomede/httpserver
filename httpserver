@@ -1,8 +1,5 @@
 <?php
 
-    // TODO: ajouter l'adresse alternative (127.0.0.1) dans la sortie standard
-    // TODO: réfléchir à une manière de forker le processus (compliqué?)
-
     function valid_argument(string $argument, array $valid_arguments) {
         return in_array($argument, $valid_arguments);
     }
