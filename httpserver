@@ -1,11 +1,5 @@
 <?php
 
-<<<<<<< HEAD
-    // TODO: add the possibility to change the host manually
-=======
-    // TODO: just a test
->>>>>>> 7ad59b9a76846c5ea7659c3823b0ad4d4abba376
-
     function valid_argument(string $argument, array $valid_arguments) {
         return in_array($argument, $valid_arguments);
     }
