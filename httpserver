@@ -29,7 +29,14 @@
         $host_address = "Server address      => http://localhost:" . $port . "/" . PHP_EOL;
 
         if ($windows) {
-            return $host_address . "    Server address       => " . gethostbyname(gethostname());
+            $ip_address = gethostbyname(gethostname());
+
+            return <<<EOS
+    Server address      => http://localhost:$port/
+    Server address      => http://127.0.0.1:$port/
+    Server address      => http://$ip_address:$port/
+
+EOS;
         }
 
         return $host_address . get_unix_addresses($port);
