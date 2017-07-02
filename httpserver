@@ -121,7 +121,7 @@ https://github.com/aminnairi/httpserver
     State               => $opened
     Root folder         => {$base}
     Server port         => {$port}
-    $server_addresses
+$server_addresses
 EOS;
 
     echo $output;
