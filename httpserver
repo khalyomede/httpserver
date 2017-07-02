@@ -39,7 +39,12 @@
 EOS;
         }
 
-        return $host_address . get_unix_addresses($port);
+        $ip_addresses =  get_unix_addresses($port);
+
+        return <<<EOS
+    Server address      => http://localhost:$port/
+$ip_addresses
+EOS;
 
     }
 
