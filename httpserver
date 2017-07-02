@@ -1,5 +1,10 @@
 <?php
 
+    // TODO: ajouter l'adresse alternative (127.0.0.1) dans la sortie standard
+    // TODO: réfléchir à une manière de forker le processus (compliqué?)
+    // TODO: ajouter dans le manuel la notice sur le fait que l'option help emp�che le serveur de d�marrer
+
+
     function valid_argument(string $argument, array $valid_arguments) {
         return in_array($argument, $valid_arguments);
     }
@@ -42,7 +47,9 @@ DESCRIPTION
                     Default is closed (localhost). When opened, the
                     host is set to 0.0.0.0.
 
-        -h, --help  Display this manual.
+        -h, --help  Display this manual. This option inhibate all others
+                    previously described options making them useless when
+                    seeking help.
 
 EOS;
 
