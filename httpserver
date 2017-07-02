@@ -4,6 +4,38 @@
         return in_array($argument, $valid_arguments);
     }
 
+	function get_unix_addresses(string $port) {
+		exec("ifconfig", $output);
+
+		$inet_lines 		= "#inet (.*) #";
+		$match_addresses 	= "#inet (.*?) #";
+		$matched_lines 		= preg_grep( $inet_lines, $output );
+		$addresses 			= [];
+
+		foreach ($matched_lines as $matched_line) {
+			preg_match($match_addresses, $matched_line, $match);
+			$addresses[] = $match[1];
+		}
+
+		$string = array_reduce($addresses, function($carry, $item) use($port) {
+			return $carry .= "    Server address      => http://" . $item . ":" . $port . "/" . PHP_EOL;
+		}, "");
+
+		return $string . PHP_EOL;
+	}
+
+    function get_server_addresses($port) {
+        $windows = substr(strtoupper(PHP_OS), 0, 3) === "WIN";
+        $host_address = "Server address      => http://localhost:" . $port . "/" . PHP_EOL;
+
+        if ($windows) {
+            return $host_address . "    Server address       => " . gethostbyname(gethostname());
+        }
+
+        return $host_address . get_unix_addresses($port);
+
+    }
+
     function display_manual() {
         echo <<<EOS
 HTTPSERVER                  PHP's user manual                   HTTPSERVER
@@ -56,8 +88,7 @@ EOS;
     $base           = "./";
     $port           = 8888;
     $host           = "localhost";
-    $opened         = "UNAVAILABLE";
-    $external_ip    = (string) gethostbyname(gethostname());
+    $opened         = "CLOSED (LOOPBACK)";
     $help           = FALSE;
     $base_arguments = ["--base", "-b"];
     $port_arguments = ["--port", "-p"];
@@ -67,29 +98,24 @@ EOS;
     foreach ($argv as $index => $argument) {
         $next_argument = $argv[$index + 1] ?? NULL;
 
-        if (valid_argument($argument, $base_arguments) && $next_argument   )  { $base = $next_argument;                     }
-        if (valid_argument($argument, $port_arguments) && $next_argument   )  { $port = $next_argument;                     }
-        if (valid_argument($argument, $open_arguments)                     )  { $host = "0.0.0.0"; $opened = "AVAILABLE";   }
-        if (valid_argument($argument, $help_arguments)                     )  { $help = TRUE;                               }
+        if (valid_argument($argument, $base_arguments) && $next_argument   )  { $base = $next_argument;                                     }
+        if (valid_argument($argument, $port_arguments) && $next_argument   )  { $port = $next_argument;                                     }
+        if (valid_argument($argument, $open_arguments)                     )  { $host = "0.0.0.0"; $opened = "OPENED (LOOPBACK + EXTERN)";    }
+        if (valid_argument($argument, $help_arguments)                     )  { $help = TRUE;                                               }
     }
 
     if ($help) display_manual();
 
+    $server_addresses = get_server_addresses($port);
+
     $output = <<<EOS
 
 https://github.com/aminnairi/httpserver
-    State               => running
+    State               => $opened
     Root folder         => {$base}
     Server port         => {$port}
-    Local address       => http://localhost:{$port}/
-    Alternative address => http://127.0.0.1:{$port}/
-    External IP         => http://{$external_ip}:{$port}/ ($opened)
-    Exit command        => CTRL C
-
-
+    $server_addresses
 EOS;
-
-    echo "HOST: " . $host . PHP_EOL;
 
     echo $output;
 
