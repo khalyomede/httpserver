@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
     function valid_argument(string $argument, array $valid_arguments) {
